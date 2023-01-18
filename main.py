@@ -16,15 +16,14 @@ for _ in range(2000):
   tot_rew += reward
 
   e = observation[2]
+  Ie += e
   de = observation[3]
 
-  Ie += e
-
-  F = Kp*(e) + Td*(de) + Ti*(Ie)
+  F = Kp*(e) + Ti*(Ie) + Td*(de)
 
   force = 1 if F > 0 else 0
   if terminated or truncated:
-    # print(tot_rew)                             # To Tune values through trial and error
+    # print(tot_rew)
     observation = env.reset()
     Ie = 0
     tot_rew = 0
