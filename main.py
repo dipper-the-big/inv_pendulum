@@ -5,8 +5,8 @@ env = gym.make('CartPole-v1', render_mode='human')
 env.reset()
 
 Kp = 50
-Ti = 20
-Td = 10
+Ki = 20
+Kd = 10
 
 tot_rew = 0
 force = 0
@@ -19,7 +19,7 @@ for _ in range(2000):
   Ie += e
   de = observation[3]
 
-  F = Kp*(e) + Ti*(Ie) + Td*(de)
+  F = Kp*(e) + Ki*(Ie) + Kd*(de)
 
   force = 1 if F > 0 else 0
   if terminated or truncated:
